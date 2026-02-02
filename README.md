@@ -1,4 +1,4 @@
-📝 Task Master Pro - Ionic & Capacitor App
+📝 To Do Ionic - Angular
 Una aplicación de gestión de tareas moderna, rápida y funcional construida con Ionic Framework, Angular y Capacitor. La app permite organizar deberes por categorías, filtrar tareas y mantiene los datos guardados localmente.
 
 🚀 Características Principales
@@ -23,10 +23,10 @@ Angular: Framework base para la lógica y estructuración.
 Capacitor: Para convertir la aplicación web en una app nativa de Android.
 
 # Evidencias funcionamiento del aplicativo (Enlace a videos de evidencia)
-# Evidencia 1: https://drive.google.com/file/d/17qohVeLUCHiI3PwpNvHtrSQlqLqT3oz6/view?usp=sharing
-# Evidencia 2: https://drive.google.com/file/d/1XRwJ8x1dVMXlhQQJ7Aw_23IngPrBZ4zy/view?usp=sharing
+Evidencia 1: https://drive.google.com/file/d/17qohVeLUCHiI3PwpNvHtrSQlqLqT3oz6/view?usp=sharing
+Evidencia 2: https://drive.google.com/file/d/1XRwJ8x1dVMXlhQQJ7Aw_23IngPrBZ4zy/view?usp=sharing
 
-Comandos de Instalación (Dependencias)
+# Comandos de Instalación (Dependencias)
 Si vas a clonar este proyecto, ejecuta estos comandos para instalar todo lo necesario:
 # Instalar dependencias de Node
 npm install
@@ -42,34 +42,6 @@ npm install @capacitor/core @capacitor/cli @capacitor/android
 Para probar la app rápidamente en tu computadora:
 
 ionic serve
-
-¡Claro que sí! Un buen README.md es la cara de tu proyecto. He preparado uno detallado que explica desde la arquitectura hasta los comandos necesarios para correr la app en Android.
-
-Crea un archivo llamado README.md en la carpeta principal de tu proyecto y pega lo siguiente:
-
-📝 Task Master Pro - Ionic & Capacitor App
-Una aplicación de gestión de tareas moderna, rápida y funcional construida con Ionic Framework, Angular y Capacitor. La app permite organizar deberes por categorías, filtrar tareas y mantiene los datos guardados localmente.
-
-🚀 Características Principales
-Persistencia de Datos: Uso de localStorage para que tus tareas no se borren al cerrar la app.
-
-Interfaz Táctil Optimizada: Tarjetas grandes (ion-card) diseñadas para ser fáciles de tocar en dispositivos móviles.
-
-Categorización Inteligente: Clasificación por Trabajo, Personal y Urgente con códigos de color dinámicos.
-
-Filtros en Tiempo Real: Pipe personalizado para filtrar tareas por categoría.
-
-Multiplataforma: Lista para ejecutarse en la Web y en Android.
-
-🛠️ Tecnologías y Dependencias
-Para construir este proyecto se utilizaron las siguientes herramientas:
-
-Core Frameworks
-Ionic CLI: Interfaz de línea de comandos para el desarrollo.
-
-Angular: Framework base para la lógica y estructuración.
-
-Capacitor: Para convertir la aplicación web en una app nativa de Android.
 
 Comandos de Instalación (Dependencias)
 Si vas a clonar este proyecto, ejecuta estos comandos para instalar todo lo necesario:
@@ -92,7 +64,6 @@ ionic serve
 
 2. Ejecución en Android (Android Studio)
 Para llevar la app a un emulador o celular real:
-
 
 # 1. Compilar el proyecto web
 
