@@ -1,0 +1,92 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Mis Tareas</ion-title>
+  </ion-toolbar>
+
+  <ion-toolbar color="light">
+    <ion-segment [value]="taskService.filterStatus()" (ionChange)="handleFilter($event)">
+      <ion-segment-button value="all"><ion-label>Todas</ion-label></ion-segment-button>
+      <ion-segment-button value="pending"><ion-label>Pendientes</ion-label></ion-segment-button>
+      <ion-segment-button value="completed"><ion-label>Hechas</ion-label></ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
+
+  <ion-toolbar color="light">
+    <ion-item lines="none" color="light">
+      <ion-icon name="filter-outline" slot="start" color="primary"></ion-icon>
+      <ion-select label="Categoría" interface="popover" [value]="taskService.filterCategory()" (ionChange)="changeCategory($event)">
+        <ion-select-option value="all">Todas</ion-select-option>
+        <ion-select-option value="General">General</ion-select-option>
+        <ion-select-option value="Trabajo">Trabajo</ion-select-option>
+        <ion-select-option value="Personal">Personal</ion-select-option>
+        <ion-select-option value="Urgente">Urgente</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-list lines="none" style="background: transparent;">
+    @for (task of taskService.filteredTasks(); track task.id) {
+      <ion-item button="true" (click)="taskService.updateTask(task.id)" detail="false" class="task-card">
+        <ion-icon slot="start" 
+                  [name]="task.completed ? 'checkmark-circle' : 'ellipse-outline'" 
+                  [color]="task.completed ? 'success' : 'dark'" 
+                  class="status-icon"></ion-icon>
+        
+        <ion-label [class.completed-text]="task.completed">
+          <h2 class="task-title">{{ task.title }}</h2>
+          <div class="category-container">
+            <span class="mini-badge" [ngClass]="'badge-' + task.category.toLowerCase()">
+              {{ task.category }}
+            </span>
+          </div>
+        </ion-label>
+
+        @if (featureFlags.getFlag('show_edit_button')) {
+          <ion-button slot="end" fill="clear" color="primary" (click)="$event.stopPropagation(); openEditModal(task)">
+            <ion-icon name="create-outline" slot="icon-only"></ion-icon>
+          </ion-button>
+        }
+
+        <ion-button slot="end" fill="clear" color="danger" (click)="$event.stopPropagation(); taskService.deleteTask(task.id)">
+          <ion-icon name="trash-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-item>
+    }
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="openAddModal()"><ion-icon name="add"></ion-icon></ion-fab-button>
+  </ion-fab>
+
+  <ion-modal [isOpen]="isModalOpen" (didDismiss)="isModalOpen = false">
+    <ng-template>
+      <div class="modal-wrapper">
+        @if (step === 1) {
+          <h3>{{ editingTaskId ? 'Editar Tarea' : '¿Qué tarea es?' }}</h3>
+          <ion-item lines="none" class="custom-input-item">
+            <ion-input [(ngModel)]="newTaskTitle" placeholder="Nombre de la tarea"></ion-input>
+          </ion-item>
+          <ion-button expand="block" mode="ios" (click)="step = 2" [disabled]="!newTaskTitle.trim()" class="main-btn">Siguiente</ion-button>
+        }
+
+        @if (step === 2) {
+          <h3>Categoría</h3>
+          <div class="category-selection-grid">
+            <ion-button fill="outline" class="category-chip btn-general" [class.active]="selectedCategory === 'General'" (click)="selectedCategory = 'General'">General</ion-button>
+            <ion-button fill="outline" class="category-chip btn-trabajo" [class.active]="selectedCategory === 'Trabajo'" (click)="selectedCategory = 'Trabajo'">Trabajo</ion-button>
+            <ion-button fill="outline" class="category-chip btn-personal" [class.active]="selectedCategory === 'Personal'" (click)="selectedCategory = 'Personal'">Personal</ion-button>
+            <ion-button fill="outline" class="category-chip btn-urgente" [class.active]="selectedCategory === 'Urgente'" (click)="selectedCategory = 'Urgente'">Urgente</ion-button>
+          </div>
+          <div class="modal-footer">
+            <ion-button fill="clear" (click)="step = 1" class="back-btn">Atrás</ion-button>
+            <ion-button (click)="saveTask()" class="main-btn" style="flex: 2;">
+              {{ editingTaskId ? 'Actualizar' : 'Guardar' }}
+            </ion-button>
+          </div>
+        }
+      </div>
+    </ng-template>
+  </ion-modal>
+</ion-content>
